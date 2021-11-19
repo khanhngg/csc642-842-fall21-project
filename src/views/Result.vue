@@ -1,5 +1,5 @@
 <template>
-  <div class="result container">
+  <div class="result container form-container">
     <h1>Results verification page Khanh Nguyen</h1>
   </div>
 </template>

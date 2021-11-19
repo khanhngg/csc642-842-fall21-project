@@ -1,26 +1,29 @@
 <template>
   <div class="home container form-container">
     <!-- Title -->
-    <h1>CSC 642 848 Fall 2021 Individual Assignment Khanh Nguyen</h1>
-    <h1>Data Survey Form</h1>
+    <h6 class="text-center">CSC 642 848 Fall 2021 Individual Assignment Khanh Nguyen</h6>
+    <h1 class="text-center">Data Survey Form</h1>
 
     <!-- Form -->
-    <form>
+    <h4>Basic Information</h4>
+    <p class="form-text">Required fields *</p>
+
+    <form class="row g-3">
       <!-- Last Name -->
-      <div class="mb-3">
+      <div class="col-sm-6 mb-3">
         <label class="form-label">Last Name *</label>
         <input type="text" class="form-control" placeholder="Enter your last name">
         <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
       </div>
 
       <!-- First Name -->
-      <div class="mb-3">
+      <div class="col-sm-6 mb-3">
         <label class="form-label">First Name *</label>
         <input type="text" class="form-control" placeholder="Enter your first name">
       </div>
 
       <!-- Preferred Title -->
-      <div class="mb-3">
+      <div class="col-12 mb-3">
         <label for="exampleInputPassword1" class="form-label">Preferred Title *</label>
         <select class="form-select" aria-label="Default select example">
           <option selected>Select your preferred title...</option>
@@ -33,10 +36,14 @@
       </div>
 
       <!-- Height -->
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Height</label>
-        <input type="number" class="form-control" placeholder="Feet">
-        <input type="number" class="form-control" placeholder="Inches">
+      <label class="form-label">Height</label>
+      <div class="col-sm-6 mb-3">
+        <input type="number" class="form-control col-sm-6" placeholder="Feet">
+      </div>
+
+      <!-- First Name -->
+      <div class="col-sm-6 mb-3">
+        <input type="number" class="form-control col-sm-6" placeholder="Inches">
       </div>
 
       <!-- Phone -->
@@ -48,7 +55,7 @@
       <!-- Address -->
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Address *</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <input type="text" class="form-control" id="exampleInputPassword1">
       </div>
 
       <!-- Services -->
