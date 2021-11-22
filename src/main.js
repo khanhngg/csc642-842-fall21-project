@@ -5,6 +5,4 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/global.css";
 
-createApp(App)
-  .use(router)
-  .mount("#app");
+createApp(App).use(router).mount("#app");

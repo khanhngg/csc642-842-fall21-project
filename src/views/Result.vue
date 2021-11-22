@@ -1,15 +1,11 @@
 <template>
-  <div class="result container form-container">
+  <div class="result container">
     <h1>Results verification page Khanh Nguyen</h1>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

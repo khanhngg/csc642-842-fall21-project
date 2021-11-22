@@ -1,32 +1,44 @@
 <template>
   <div class="home container form-container">
     <!-- Title -->
-    <h6 class="text-center">CSC 642 848 Fall 2021 Individual Assignment Khanh Nguyen</h6>
+    <h6 class="text-center">
+      CSC 642 848 Fall 2021 Individual Assignment Khanh Nguyen
+    </h6>
     <h1 class="text-center">Data Survey Form</h1>
-
-    <!-- Form -->
-    <h4>Basic Information</h4>
     <p class="form-text">Required fields *</p>
 
-    <form class="row g-3">
+    <!-- Form -->
+    <form class="row g-3" @submit.prevent="onSubmit">
+      <h4 class="fw-bold text-uppercase">Personal Information</h4>
       <!-- Last Name -->
       <div class="col-sm-6 mb-3">
         <label class="form-label">Last Name *</label>
-        <input type="text" class="form-control" placeholder="Enter your last name">
-        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your last name"
+          required
+          v-model="lastName"
+        />
       </div>
 
       <!-- First Name -->
       <div class="col-sm-6 mb-3">
         <label class="form-label">First Name *</label>
-        <input type="text" class="form-control" placeholder="Enter your first name">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your first name"
+          required
+          v-model="firstName"
+        />
       </div>
 
       <!-- Preferred Title -->
       <div class="col-12 mb-3">
-        <label for="exampleInputPassword1" class="form-label">Preferred Title *</label>
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Select your preferred title...</option>
+        <label class="form-label">Preferred Title *</label>
+        <select class="form-select" required v-model="preferredTitle">
+          <option selected value="">Select your preferred title...</option>
           <option value="none">None</option>
           <option value="student">Student</option>
           <option value="professor">Professor</option>
@@ -36,114 +48,194 @@
       </div>
 
       <!-- Height -->
-      <label class="form-label">Height</label>
-      <div class="col-sm-6 mb-3">
-        <input type="number" class="form-control col-sm-6" placeholder="Feet">
+      <label class="form-label mb-0">Height</label>
+      <div class="col-12 col-md-3 mb-3 mt-0">
+        <div class="form-text">Feet</div>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Feet"
+          v-model="height.feet"
+        />
       </div>
-
-      <!-- First Name -->
-      <div class="col-sm-6 mb-3">
-        <input type="number" class="form-control col-sm-6" placeholder="Inches">
+      <div class="col-12 col-md-3 mb-3 mt-0">
+        <div class="form-text">Inches</div>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Inches"
+          v-model="height.inches"
+        />
       </div>
 
       <!-- Phone -->
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Phone Number</label>
-        <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        <label class="form-label">Phone Number</label>
+        <input
+          type="tel"
+          class="form-control"
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          v-model="phone"
+        />
       </div>
 
       <!-- Address -->
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Address *</label>
-        <input type="text" class="form-control" id="exampleInputPassword1">
+      <hr class="my-4" />
+      <h4 class="fw-bold text-uppercase">Address Information</h4>
+      <div class="col-12">
+        <label class="form-label">Street Address *</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="123 Main St"
+          required
+          v-model="address.streetAddress"
+        />
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Apartment/Suite Number</label>
+        <div class="col-5">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="10B"
+            v-model="address.apartmentNumber"
+          />
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">City</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter city name"
+          v-model="address.city"
+        />
+      </div>
+
+      <div class="col-md-5">
+        <label for="country" class="form-label">Country *</label>
+        <select
+          class="form-select"
+          id="country"
+          required=""
+          v-model="address.country"
+        >
+          <option value="">Select country...</option>
+          <option>United States</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label for="state" class="form-label">State *</label>
+        <select
+          class="form-select"
+          id="state"
+          required=""
+          v-model="address.state"
+        >
+          <option value="">Select state...</option>
+          <option>California</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <label for="zip" class="form-label">Zip *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="zip"
+          placeholder="12345"
+          required=""
+          v-model="address.zip"
+        />
       </div>
 
       <!-- Services -->
+      <hr class="my-4" />
+      <h4 class="fw-bold text-uppercase">Services Preferences</h4>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Check all services you require:</label>
+        <label class="form-label">Check all services you require:</label>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Email
-          </label>
+          <input class="form-check-input" type="checkbox" value="email" v-model="services"/>
+          <label class="form-check-label"> Email </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Phone
-          </label>
+          <input class="form-check-input" type="checkbox" value="phone" v-model="services" />
+          <label class="form-check-label"> Phone </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Facebook
-          </label>
+          <input class="form-check-input" type="checkbox" value="facebook" v-model="services" />
+          <label class="form-check-label"> Facebook </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Twitter
-          </label>
+          <input class="form-check-input" type="checkbox" value="twitter" v-model="services" />
+          <label class="form-check-label"> Twitter </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Surface Email
-          </label>
+          <input class="form-check-input" type="checkbox" value="surface" v-model="services" />
+          <label class="form-check-label"> Surface Email </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">
-            Personal Visit
-          </label>
+          <input class="form-check-input" type="checkbox" value="personal" v-model="services" />
+          <label class="form-check-label"> Personal Visit </label>
         </div>
       </div>
 
       <!-- Monthly Budget -->
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Monthly Budget</label>
+        <label class="form-label">Monthly Budget</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Less than $50
-          </label>
+          <input class="form-check-input" type="radio" value="lessThan50" v-model="monthlyBudget"/>
+          <label class="form-check-label"> Less than $50 </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            Between $50 and $100
-          </label>
+          <input class="form-check-input" type="radio" value="between50And100" v-model="monthlyBudget"/>
+          <label class="form-check-label"> Between $50 and $100 </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-             Above $100
-          </label>
+          <input class="form-check-input" type="radio" value="above100" v-model="monthlyBudget"/>
+          <label class="form-check-label"> Above $100 </label>
         </div>
       </div>
 
       <!-- Email -->
+      <hr class="my-4" />
+      <h4 class="fw-bold text-uppercase">Contact Information</h4>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Email Address *</label>
-        <input type="email" class="form-control" id="exampleInputPassword1">
+        <label class="form-label">Email Address *</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="you@example.com"
+          required
+        />
       </div>
 
       <!-- Terms and Conditions -->
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">I agree to <a href="#">Terms & Conditions</a></label>
+      <hr class="my-4" />
+      <div class="mb-3">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" required v-model="terms"/>
+          <label class="form-check-label form-label"
+            >I agree to the <a href="#">Terms & Conditions</a> *</label
+          >
+        </div>
       </div>
 
       <!-- Captcha -->
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">CAPTCHA</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+      <div class="mb-5">
+        <label class="form-label">CAPTCHA *</label>
+        <input type="password" class="form-control" />
       </div>
 
-      <!-- Buttons -->
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-outline-secondary me-md-2" type="button">Cancel</button>
-        <button class="btn btn-primary" type="button">Submit</button>
+      <!-- Button -->
+      <div class="mb-5 text-center">
+        <button class="w-50 btn btn-primary btn-lg fw-bold text-uppercase" type="button">
+          Submit
+        </button>
       </div>
     </form>
   </div>
@@ -152,13 +244,46 @@
 <script>
 export default {
   name: "Home",
-  components: {
+  data() {
+    return {
+      lastName: "",
+      firstName: "",
+      preferredTitle: "",
+      height: {
+        feet: 0,
+        inches: 0,
+      },
+      phone: "",
+      address: {
+        streetAddress: "",
+        apartmentNumber: "",
+        city: "",
+        country: "",
+        state: "",
+        zip: "",
+      },
+      services: [],
+      monthlyBudget: "",
+      email: "",
+      terms: false,
+      captcha: false,
+    };
+  },
+  methods: {
+    onSubmit() {
+      // validate
+
+      // save to local storage
+
+      // go to /result
+
+    }
   },
 };
 </script>
 
 <style scoped>
-  .form-label {
-    font-weight: 600;
-  }
+.form-label {
+  font-weight: 600;
+}
 </style>
