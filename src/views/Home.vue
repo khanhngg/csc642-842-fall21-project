@@ -74,10 +74,9 @@
         <input
           type="tel"
           class="form-control"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          maxlength="10"
           placeholder="1234567890"
           v-model="phone"
+          v-mask="'(###) ###-####'"
         />
         <p class="form-text">Enter a 10 digit phone number</p>
       </div>
@@ -298,8 +297,13 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
+
 export default {
   name: "Home",
+  directives: {
+    mask,
+  },
   data() {
     return {
       lastName: "",
