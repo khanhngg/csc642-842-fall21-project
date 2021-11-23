@@ -5,7 +5,7 @@
       CSC 642 842 Fall 2021 Individual Assignment Khanh Nguyen
     </h6>
     <h1 class="text-center">Data Survey Form</h1>
-    <p class="form-text">Required fields *</p>
+    <p class="form-text">Required fields are marked with *</p>
 
     <!-- Form -->
     <form class="row g-3" @submit.prevent="onSubmit">
@@ -76,9 +76,10 @@
           class="form-control"
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
           maxlength="10"
-          placeholder="123 456 7890"
+          placeholder="1234567890"
           v-model="phone"
         />
+        <p class="form-text">Enter a 10 digit phone number</p>
       </div>
 
       <!-- Address -->
