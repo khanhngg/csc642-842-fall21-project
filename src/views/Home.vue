@@ -5,7 +5,7 @@
       CSC 642 842 Fall 2021 Individual Assignment Khanh Nguyen
     </h6>
     <h1 class="text-center">Data Survey Form</h1>
-    <p class="form-text">Required fields are marked with *</p>
+    <p class="form-text fst-italic mb-4">Required fields are marked with *</p>
 
     <!-- Form -->
     <form class="row g-3" @submit.prevent="onSubmit">
@@ -17,6 +17,7 @@
           type="text"
           class="form-control"
           placeholder="Enter your last name"
+          maxlength="40"
           required
           v-model="lastName"
         />
@@ -29,6 +30,7 @@
           type="text"
           class="form-control"
           placeholder="Enter your first name"
+          maxlength="40"
           required
           v-model="firstName"
         />
@@ -78,7 +80,7 @@
           v-model="phone"
           v-mask="'(###) ###-####'"
         />
-        <p class="form-text">Enter a 10 digit phone number</p>
+        <p class="form-text mb-0">Enter a 10 digit phone number</p>
       </div>
 
       <!-- Address -->
@@ -90,6 +92,7 @@
           type="text"
           class="form-control"
           placeholder="123 Main St"
+          maxlength="40"
           required
           v-model="address.streetAddress"
         />
@@ -97,11 +100,11 @@
 
       <div class="col-12">
         <label class="form-label">Apartment/Suite Number</label>
-        <div class="col-5">
+        <div class="col-md-5">
           <input
             type="text"
             class="form-control"
-            placeholder="10B"
+            placeholder="20A"
             v-model="address.apartmentNumber"
           />
         </div>
@@ -122,7 +125,7 @@
         <select
           class="form-select"
           id="country"
-          required=""
+          required
           v-model="address.country"
         >
           <option value="">Select country...</option>
@@ -135,7 +138,7 @@
         <select
           class="form-select"
           id="state"
-          required=""
+          required
           v-model="address.state"
         >
           <option value="">Select state...</option>
@@ -150,7 +153,8 @@
           class="form-control"
           id="zip"
           placeholder="12345"
-          required=""
+          maxlength="5"
+          required
           v-model="address.zip"
         />
       </div>
@@ -167,7 +171,7 @@
             value="email"
             v-model="services"
           />
-          <label class="form-check-label"> Email </label>
+          <label class="form-check-label">Email</label>
         </div>
         <div class="form-check">
           <input
@@ -176,7 +180,7 @@
             value="phone"
             v-model="services"
           />
-          <label class="form-check-label"> Phone </label>
+          <label class="form-check-label">Phone</label>
         </div>
         <div class="form-check">
           <input
@@ -185,7 +189,7 @@
             value="facebook"
             v-model="services"
           />
-          <label class="form-check-label"> Facebook </label>
+          <label class="form-check-label">Facebook</label>
         </div>
         <div class="form-check">
           <input
@@ -194,7 +198,7 @@
             value="twitter"
             v-model="services"
           />
-          <label class="form-check-label"> Twitter </label>
+          <label class="form-check-label">Twitter</label>
         </div>
         <div class="form-check">
           <input
@@ -203,7 +207,7 @@
             value="surface"
             v-model="services"
           />
-          <label class="form-check-label"> Surface Email </label>
+          <label class="form-check-label">Surface mail</label>
         </div>
         <div class="form-check">
           <input
@@ -212,7 +216,7 @@
             value="personal"
             v-model="services"
           />
-          <label class="form-check-label"> Personal Visit </label>
+          <label class="form-check-label">Personal visit</label>
         </div>
       </div>
 
@@ -226,7 +230,7 @@
             value="lessThan50"
             v-model="monthlyBudget"
           />
-          <label class="form-check-label"> Less than $50 </label>
+          <label class="form-check-label">Less than $50</label>
         </div>
         <div class="form-check">
           <input
@@ -235,7 +239,7 @@
             value="between50And100"
             v-model="monthlyBudget"
           />
-          <label class="form-check-label"> Between $50 and $100 </label>
+          <label class="form-check-label">Between $50 and $100</label>
         </div>
         <div class="form-check">
           <input
@@ -244,7 +248,7 @@
             value="above100"
             v-model="monthlyBudget"
           />
-          <label class="form-check-label"> Above $100 </label>
+          <label class="form-check-label">Above $100</label>
         </div>
       </div>
 
@@ -258,6 +262,7 @@
           class="form-control"
           placeholder="you@example.com"
           required
+          v-model="email"
         />
       </div>
 
@@ -271,16 +276,14 @@
             required
             v-model="terms"
           />
-          <label class="form-check-label form-label"
-            >I agree to the <a href="#">Terms & Conditions</a> *</label
-          >
+          <label class="form-check-label form-label">I agree to the <a href="#">Terms & Conditions</a> *</label>
         </div>
       </div>
 
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <input type="password" class="form-control" />
+        <input type="text" class="form-control" />
       </div>
 
       <!-- Button -->
