@@ -520,6 +520,7 @@ export default {
       },
       phone: {
         numeric,
+        minLength: minLength(10),
         maxLength: maxLength(10)
       },
       address: {
