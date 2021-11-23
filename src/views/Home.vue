@@ -2,7 +2,7 @@
   <div class="home container form-container">
     <!-- Title -->
     <h6 class="text-center">
-      CSC 642 848 Fall 2021 Individual Assignment Khanh Nguyen
+      CSC 642 842 Fall 2021 Individual Assignment Khanh Nguyen
     </h6>
     <h1 class="text-center">Data Survey Form</h1>
     <p class="form-text">Required fields *</p>
@@ -75,6 +75,8 @@
           type="tel"
           class="form-control"
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          maxlength="10"
+          placeholder="123 456 7890"
           v-model="phone"
         />
       </div>
@@ -106,7 +108,7 @@
       </div>
 
       <div class="col-12">
-        <label class="form-label">City</label>
+        <label class="form-label">City *</label>
         <input
           type="text"
           class="form-control"
@@ -159,27 +161,57 @@
       <div class="mb-3">
         <label class="form-label">Check all services you require:</label>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="email" v-model="services"/>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="email"
+            v-model="services"
+          />
           <label class="form-check-label"> Email </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="phone" v-model="services" />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="phone"
+            v-model="services"
+          />
           <label class="form-check-label"> Phone </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="facebook" v-model="services" />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="facebook"
+            v-model="services"
+          />
           <label class="form-check-label"> Facebook </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="twitter" v-model="services" />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="twitter"
+            v-model="services"
+          />
           <label class="form-check-label"> Twitter </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="surface" v-model="services" />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="surface"
+            v-model="services"
+          />
           <label class="form-check-label"> Surface Email </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="personal" v-model="services" />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="personal"
+            v-model="services"
+          />
           <label class="form-check-label"> Personal Visit </label>
         </div>
       </div>
@@ -188,15 +220,30 @@
       <div class="mb-3">
         <label class="form-label">Monthly Budget</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" value="lessThan50" v-model="monthlyBudget"/>
+          <input
+            class="form-check-input"
+            type="radio"
+            value="lessThan50"
+            v-model="monthlyBudget"
+          />
           <label class="form-check-label"> Less than $50 </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" value="between50And100" v-model="monthlyBudget"/>
+          <input
+            class="form-check-input"
+            type="radio"
+            value="between50And100"
+            v-model="monthlyBudget"
+          />
           <label class="form-check-label"> Between $50 and $100 </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" value="above100" v-model="monthlyBudget"/>
+          <input
+            class="form-check-input"
+            type="radio"
+            value="above100"
+            v-model="monthlyBudget"
+          />
           <label class="form-check-label"> Above $100 </label>
         </div>
       </div>
@@ -218,7 +265,12 @@
       <hr class="my-4" />
       <div class="mb-3">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" required v-model="terms"/>
+          <input
+            type="checkbox"
+            class="form-check-input"
+            required
+            v-model="terms"
+          />
           <label class="form-check-label form-label"
             >I agree to the <a href="#">Terms & Conditions</a> *</label
           >
@@ -233,7 +285,10 @@
 
       <!-- Button -->
       <div class="mb-5 text-center">
-        <button class="w-50 btn btn-primary btn-lg fw-bold text-uppercase" type="button">
+        <button
+          class="w-50 btn btn-primary btn-lg fw-bold text-uppercase"
+          type="button"
+        >
           Submit
         </button>
       </div>
@@ -272,12 +327,9 @@ export default {
   methods: {
     onSubmit() {
       // validate
-
       // save to local storage
-
       // go to /result
-
-    }
+    },
   },
 };
 </script>
