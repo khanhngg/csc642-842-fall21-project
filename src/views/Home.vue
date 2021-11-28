@@ -483,6 +483,7 @@ export default {
         email: "",
         terms: false,
         captcha: false,
+        captchaResponse: "",
       },
       // References: https://usastatescode.com/state-array-json
       states: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
@@ -558,6 +559,10 @@ export default {
     async onSubmit() {
       await this.v$.$touch();
 
+      let captcha = window.grecaptcha.getResponse()
+      console.log('captcha response:')
+      console.log(captcha)
+      
       if (!this.v$.$invalid) {
         localStorage.setItem('form', JSON.stringify(this.form))
         this.$router.push('result')
