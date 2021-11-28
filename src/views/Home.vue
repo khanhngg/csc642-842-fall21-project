@@ -81,7 +81,7 @@
       </div>
 
       <!-- Height -->
-      <label class="form-label mb-0">Height</label>
+      <label class="form-label mb-0">Your Height</label>
       <div class="col-12 col-md-4 mb-3 mt-0">
         <div class="form-text">Feet</div>
         <input
@@ -568,10 +568,6 @@ export default {
 </script>
 
 <style scoped>
-.form-label {
-  font-weight: 600;
-}
-
 .invalid-message {
   margin-top: 0.25rem;
   font-size: 0.875em;

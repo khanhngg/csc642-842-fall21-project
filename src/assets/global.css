@@ -1,3 +1,7 @@
 .form-container {
   max-width: 820px;
 }
+
+.form-label {
+  font-weight: 600;
+}
