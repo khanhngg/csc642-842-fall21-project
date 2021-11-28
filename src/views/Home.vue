@@ -217,7 +217,7 @@
           :class="{ 'invalid-field': v$.form.address.state.$error }"
         >
           <option value="">Select state...</option>
-          <option>California</option>
+          <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
         </select>
         <div v-if="v$.form.address.state.$error">
           <p
@@ -482,6 +482,8 @@ export default {
         terms: false,
         captcha: false,
       },
+      // References: https://usastatescode.com/state-array-json
+      states: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
     };
   },
   validations() {
@@ -555,7 +557,7 @@ export default {
       await this.v$.$touch();
 
       if (!this.v$.$invalid) {
-        localStorage.setItem('form',JSON.stringify(this.form))
+        localStorage.setItem('form', JSON.stringify(this.form))
         this.$router.push('result')
       } else {
         return

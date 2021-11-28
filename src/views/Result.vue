@@ -1,6 +1,6 @@
 <template>
   <div class="result container">
-    <h1>Results verification page Khanh Nguyen</h1>
+    <h1 class="text-center">Results verification page Khanh Nguyen</h1>
   </div>
 </template>
 
