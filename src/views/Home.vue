@@ -17,14 +17,14 @@
           type="text"
           class="form-control"
           placeholder="Enter your last name"
-          :class="{ 'invalid-field': v$.lastName.$error }"
-          v-model="lastName"
+          :class="{ 'invalid-field': v$.form.lastName.$error }"
+          v-model="form.lastName"
           required
         />
-        <div v-if="v$.lastName.$error">
+        <div v-if="v$.form.lastName.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.lastName.$errors"
+            v-for="error in v$.form.lastName.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -40,13 +40,13 @@
           class="form-control"
           placeholder="Enter your first name"
           maxlength="40"
-          :class="{ 'invalid-field': v$.firstName.$error }"
-          v-model="firstName"
+          :class="{ 'invalid-field': v$.form.firstName.$error }"
+          v-model="form.firstName"
         />
-        <div v-if="v$.firstName.$error">
+        <div v-if="v$.form.firstName.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.firstName.$errors"
+            v-for="error in v$.form.firstName.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -59,8 +59,8 @@
         <label class="form-label">Preferred Title *</label>
         <select
           class="form-select"
-          v-model="preferredTitle"
-          :class="{ 'invalid-field': v$.preferredTitle.$error }"
+          v-model="form.preferredTitle"
+          :class="{ 'invalid-field': v$.form.preferredTitle.$error }"
         >
           <option selected value="">Select your preferred title...</option>
           <option value="none">None</option>
@@ -69,10 +69,10 @@
           <option value="staff">Staff</option>
           <option value="retired">Retired</option>
         </select>
-        <div v-if="v$.preferredTitle.$error">
+        <div v-if="v$.form.preferredTitle.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.preferredTitle.$errors"
+            v-for="error in v$.form.preferredTitle.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -88,13 +88,13 @@
           type="number"
           class="form-control"
           placeholder="Feet"
-          v-model="height.feet"
-          :class="{ 'invalid-field': v$.height.feet.$error }"
+          v-model="form.height.feet"
+          :class="{ 'invalid-field': v$.form.height.feet.$error }"
         />
-        <div v-if="v$.height.feet.$error">
+        <div v-if="v$.form.height.feet.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.height.feet.$errors"
+            v-for="error in v$.form.height.feet.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -107,13 +107,13 @@
           type="number"
           class="form-control"
           placeholder="Inches"
-          v-model="height.inches"
-          :class="{ 'invalid-field': v$.height.inches.$error }"
+          v-model="form.height.inches"
+          :class="{ 'invalid-field': v$.form.height.inches.$error }"
         />
-        <div v-if="v$.height.inches.$error">
+        <div v-if="v$.form.height.inches.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.height.inches.$errors"
+            v-for="error in v$.form.height.inches.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -128,13 +128,13 @@
           type="tel"
           class="form-control"
           placeholder="Enter a 10 digit phone number"
-          v-model="phone"
-          :class="{ 'invalid-field': v$.phone.$error }"
+          v-model="form.phone"
+          :class="{ 'invalid-field': v$.form.phone.$error }"
         />
-        <div v-if="v$.phone.$error">
+        <div v-if="v$.form.phone.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.phone.$errors"
+            v-for="error in v$.form.phone.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -152,13 +152,13 @@
           class="form-control"
           placeholder="123 Main St"
           maxlength="40"
-          v-model="address.streetAddress"
-          :class="{ 'invalid-field': v$.address.streetAddress.$error }"
+          v-model="form.address.streetAddress"
+          :class="{ 'invalid-field': v$.form.address.streetAddress.$error }"
         />
-        <div v-if="v$.address.streetAddress.$error">
+        <div v-if="v$.form.address.streetAddress.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.address.streetAddress.$errors"
+            v-for="error in v$.form.address.streetAddress.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -173,34 +173,14 @@
             type="text"
             class="form-control"
             placeholder="20A"
-            v-model="address.apartmentNumber"
-            :class="{ 'invalid-field': v$.address.apartmentNumber.$error }"
+            v-model="form.address.apartmentNumber"
+            :class="{ 'invalid-field': v$.form.address.apartmentNumber.$error }"
           />
         </div>
-        <div v-if="v$.address.apartmentNumber.$error">
+        <div v-if="v$.form.address.apartmentNumber.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.address.apartmentNumber.$errors"
-            class="mb-0 invalid-message"
-          >
-            {{ error.$message }}
-          </p>
-        </div>
-      </div>
-
-      <div class="col-12">
-        <label class="form-label">City *</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter city name"
-          v-model="address.city"
-          :class="{ 'invalid-field': v$.address.city.$error }"
-        />
-        <div v-if="v$.address.city.$error">
-          <p
-            :key="error.$uid"
-            v-for="error in v$.address.city.$errors"
+            v-for="error in v$.form.address.apartmentNumber.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -209,20 +189,18 @@
       </div>
 
       <div class="col-md-5">
-        <label for="country" class="form-label">Country *</label>
-        <select
-          class="form-select"
-          id="country"
-          v-model="address.country"
-          :class="{ 'invalid-field': v$.address.country.$error }"
-        >
-          <option value="">Select country...</option>
-          <option value="United States">United States</option>
-        </select>
-        <div v-if="v$.address.country.$error">
+        <label class="form-label">City *</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter city name"
+          v-model="form.address.city"
+          :class="{ 'invalid-field': v$.form.address.city.$error }"
+        />
+        <div v-if="v$.form.address.city.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.address.country.$errors"
+            v-for="error in v$.form.address.city.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -235,16 +213,16 @@
         <select
           class="form-select"
           id="state"
-          v-model="address.state"
-          :class="{ 'invalid-field': v$.address.state.$error }"
+          v-model="form.address.state"
+          :class="{ 'invalid-field': v$.form.address.state.$error }"
         >
           <option value="">Select state...</option>
           <option>California</option>
         </select>
-        <div v-if="v$.address.state.$error">
+        <div v-if="v$.form.address.state.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.address.state.$errors"
+            v-for="error in v$.form.address.state.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -260,13 +238,13 @@
           id="zip"
           placeholder="12345"
           maxlength="5"
-          v-model="address.zip"
-          :class="{ 'invalid-field': v$.address.zip.$error }"
+          v-model="form.address.zip"
+          :class="{ 'invalid-field': v$.form.address.zip.$error }"
         />
-        <div v-if="v$.address.zip.$error">
+        <div v-if="v$.form.address.zip.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.address.zip.$errors"
+            v-for="error in v$.form.address.zip.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -284,54 +262,60 @@
             class="form-check-input"
             type="checkbox"
             value="email"
-            v-model="services"
+            v-model="form.services"
+            id="emailService"
           />
-          <label class="form-check-label">Email</label>
+          <label class="form-check-label" for="emailService">Email</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="checkbox"
             value="phone"
-            v-model="services"
+            v-model="form.services"
+            id="phoneService"
           />
-          <label class="form-check-label">Phone</label>
+          <label class="form-check-label" for="phoneService">Phone</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="checkbox"
             value="facebook"
-            v-model="services"
+            v-model="form.services"
+            id="facebookService"
           />
-          <label class="form-check-label">Facebook</label>
+          <label class="form-check-label" for="facebookService">Facebook</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="checkbox"
             value="twitter"
-            v-model="services"
+            v-model="form.services"
+            id="twitterService"
           />
-          <label class="form-check-label">Twitter</label>
+          <label class="form-check-label" for="twitterService">Twitter</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="checkbox"
             value="surface"
-            v-model="services"
+            v-model="form.services"
+            id="surfaceMailService"
           />
-          <label class="form-check-label">Surface mail</label>
+          <label class="form-check-label" for="surfaceMailService">Surface mail</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="checkbox"
             value="personal"
-            v-model="services"
+            v-model="form.services"
+            id="personalVisitService"
           />
-          <label class="form-check-label">Personal visit</label>
+          <label class="form-check-label" for="personalVisitService">Personal visit</label>
         </div>
       </div>
 
@@ -343,27 +327,30 @@
             class="form-check-input"
             type="radio"
             value="lessThan50"
-            v-model="monthlyBudget"
+            v-model="form.monthlyBudget"
+            id="lessThan50"
           />
-          <label class="form-check-label">Less than $50</label>
+          <label class="form-check-label" for="lessThan50">Less than $50</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="radio"
             value="between50And100"
-            v-model="monthlyBudget"
+            v-model="form.monthlyBudget"
+            id="between50And100"
           />
-          <label class="form-check-label">Between $50 and $100</label>
+          <label class="form-check-label" for="between50And100">Between $50 and $100</label>
         </div>
         <div class="form-check">
           <input
             class="form-check-input"
             type="radio"
             value="above100"
-            v-model="monthlyBudget"
+            v-model="form.monthlyBudget"
+            id="above100"
           />
-          <label class="form-check-label">Above $100</label>
+          <label class="form-check-label" for="above100">Above $100</label>
         </div>
       </div>
 
@@ -376,13 +363,13 @@
           type="email"
           class="form-control"
           placeholder="you@example.com"
-          v-model="email"
-          :class="{ 'invalid-field': v$.email.$error }"
+          v-model="form.email"
+          :class="{ 'invalid-field': v$.form.email.$error }"
         />
-        <div v-if="v$.email.$error">
+        <div v-if="v$.form.email.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.email.$errors"
+            v-for="error in v$.form.email.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -397,17 +384,18 @@
           <input
             type="checkbox"
             class="form-check-input"
-            v-model="terms"
-            :class="{ 'invalid-field': v$.terms.$error }"
+            v-model="form.terms"
+            :class="{ 'invalid-field': v$.form.terms.$error }"
+            id="termsCheck"
           />
-          <label class="form-check-label form-label mb-0"
-            >I agree to the <a href="#">Terms & Conditions</a> *</label
-          >
+          <label class="form-check-label form-label mb-0" for="termsCheck">
+            I agree to the <a href="#">Terms & Conditions</a> *
+          </label>
         </div>
-        <div v-if="v$.terms.$error">
+        <div v-if="v$.form.terms.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.terms.$errors"
+            v-for="error in v$.form.terms.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -421,13 +409,13 @@
         <input
           type="text"
           class="form-control"
-          v-model="captcha"
-          :class="{ 'invalid-field': v$.captcha.$error }"
+          v-model="form.captcha"
+          :class="{ 'invalid-field': v$.form.captcha.$error }"
         />
-        <div v-if="v$.captcha.$error">
+        <div v-if="v$.form.captcha.$error">
           <p
             :key="error.$uid"
-            v-for="error in v$.captcha.$errors"
+            v-for="error in v$.form.captcha.$errors"
             class="mb-0 invalid-message"
           >
             {{ error.$message }}
@@ -472,109 +460,105 @@ export default {
   data() {
     return {
       v$: useVuelidate(),
-      lastName: "",
-      firstName: "",
-      preferredTitle: "",
-      height: {
-        feet: 0,
-        inches: 0,
+      form: {
+        lastName: "",
+        firstName: "",
+        preferredTitle: "",
+        height: {
+          feet: 0,
+          inches: 0,
+        },
+        phone: "",
+        address: {
+          streetAddress: "",
+          apartmentNumber: "",
+          city: "",
+          state: "",
+          zip: "",
+        },
+        services: [],
+        monthlyBudget: "",
+        email: "",
+        terms: false,
+        captcha: false,
       },
-      phone: "",
-      address: {
-        streetAddress: "",
-        apartmentNumber: "",
-        city: "",
-        country: "",
-        state: "",
-        zip: "",
-      },
-      services: [],
-      monthlyBudget: "",
-      email: "",
-      terms: false,
-      captcha: false,
     };
   },
   validations() {
     return {
-      lastName: {
-        required,
-        alpha,
-        maxLength: maxLength(40),
-      },
-      firstName: {
-        required,
-        alpha,
-        maxLength: maxLength(40),
-      },
-      preferredTitle: { required },
-      height: {
-        feet: {
-          minValue: minValue(0),
-          maxValue: maxValue(10),
-        },
-        inches: {
-          minValue: minValue(0),
-          maxValue: maxValue(11),
-        },
-      },
-      phone: {
-        numeric,
-        minLength: minLength(10),
-        maxLength: maxLength(10)
-      },
-      address: {
-        streetAddress: {
+      form: {
+        lastName: {
           required,
-          validAlphaNumeric: helpers.withMessage('The value must be alpha-numeric', validAlphaNumeric),
+          alpha,
           maxLength: maxLength(40),
         },
-        apartmentNumber: {
-          validAlphaNumeric: helpers.withMessage('The value must be alpha-numeric', validAlphaNumeric),
+        firstName: {
+          required,
+          alpha,
           maxLength: maxLength(40),
         },
-        city: {
-          required,
-          validAlphaNumeric: helpers.withMessage('The value must be alpha-numeric', validAlphaNumeric),
+        preferredTitle: { required },
+        height: {
+          feet: {
+            minValue: minValue(0),
+            maxValue: maxValue(10),
+          },
+          inches: {
+            minValue: minValue(0),
+            maxValue: maxValue(11),
+          },
         },
-        country: {
-          required,
-          validAlphaNumeric: helpers.withMessage('The value must be alpha-numeric', validAlphaNumeric),
-        },
-        state: {
-          required,
-          validAlphaNumeric: helpers.withMessage('The value must be alpha-numeric', validAlphaNumeric),
-        },
-        zip: {
-          required,
+        phone: {
           numeric,
-          maxLength: maxLength(5),
-          minLength: helpers.withMessage('This field should have 5 digits', minLength(5)),
+          minLength: minLength(10),
+          maxLength: maxLength(10)
         },
+        address: {
+          streetAddress: {
+            required,
+            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+            maxLength: maxLength(40),
+          },
+          apartmentNumber: {
+            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+            maxLength: maxLength(40),
+          },
+          city: {
+            required,
+            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+          },
+          state: {
+            required,
+            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+          },
+          zip: {
+            required,
+            numeric,
+            maxLength: maxLength(5),
+            minLength: helpers.withMessage('Value must have 5 digits', minLength(5)),
+          },
+        },
+        email: {
+          required,
+          email
+        },
+        terms: {
+          required,
+          sameAs: helpers.withMessage('Please indicate that you have read and agreed to the Terms & Conditions', sameAs(true)),
+        },
+        captcha: { required },
       },
-      email: {
-        required,
-        email
-      },
-      terms: {
-        required,
-        sameAs: helpers.withMessage('Please indicate that you have read and agreed to the Terms & Conditions', sameAs(true)),
-      },
-      captcha: { required },
     };
   },
   methods: {
     async onSubmit() {
-      // validate
-      console.log("onsubmit called...");
       await this.v$.$touch();
 
       if (!this.v$.$invalid) {
-        // save to local storage
-        // go to /result
-        console.log("no errors!! go to result...");
+        localStorage.setItem('form',JSON.stringify(this.form))
+        this.$router.push('result')
       } else {
-        console.log("got errors");
+        return
       }
     },
   },
