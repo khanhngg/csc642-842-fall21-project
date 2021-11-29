@@ -406,13 +406,13 @@
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <!-- <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" @click="handleCaptcha"></div> -->
-        <vue-recaptcha
+        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" @click="handleCaptcha"></div>
+        <!-- <vue-recaptcha
            theme="light"
             size="normal"
             :tabindex="0"
             @verify="callbackVerify"
-        />
+        /> -->
       </div>
 
       <!-- Button -->
@@ -560,6 +560,12 @@ export default {
       } else {
         return
       }
+    },
+    handleCaptcha() {
+      console.log('captchat is clicked.....')
+      let test = window.grecaptcha.getResponse()
+      console.log(test)
+      
     },
     callbackVerify(response) {
       console.log('callbackverify...')
