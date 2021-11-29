@@ -30,7 +30,7 @@
       <p class="mb-0" v-if="this.form.address.apartmentNumber">
         {{ this.form.address.apartmentNumber }}
       </p>
-      <p class="mb-0">
+      <p class="mb-3">
         {{ this.form.address.city }}, {{ this.form.address.state }}
         {{ this.form.address.zip }}
       </p>
@@ -38,9 +38,15 @@
       <!-- Google Maps -->
       <GMapMap
         :center="mapCenter"
-        :zoom="15"
+        :zoom="14"
         map-type-id="roadmap"
-      />
+      >
+        <GMapMarker
+          :position="mapCenter"
+          :clickable="true"
+          :draggable="true"
+        />
+      </GMapMap>
     </section>
 
     <!-- Services Preferences -->
@@ -155,7 +161,6 @@ export default {
           value: "Above $100",
         },
       ],
-      map: null,
       mapCenter: {
         lat: 0,
         lng: 0,
@@ -187,32 +192,31 @@ export default {
     },
   },
   async mounted() {
+    // parse local storage to get form data
     this.form = JSON.parse(localStorage.getItem("form"));
 
-    let { streetAddress, apartmentNumber, city, state, zip } =
-      this.form.address;
+    // get address information from form
+    let { streetAddress, apartmentNumber, city, state, zip } = this.form.address;
 
-    // call Geocode API to get latitude and longitude from address
+    // call Geocode API to get latitude and longitude from address information
     let query = `${streetAddress},${apartmentNumber},${city},${state},${zip}`;
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=AIzaSyC4Dwl-tqT4jJ8F8FxIw0ALr9yxxoXI0MI`
     );
     const data = await response.json();
+
+    // set latitude and longitude for map center and marker 
     let { lat, lng } = data.results[0].geometry.location;
-    console.log(lat);
-    console.log(lng);
     this.mapCenter = {
       lat: lat,
       lng: lng
     }
-    // console.log(this.mapCenter)
-    // call Google Maps API to get the map with marker
   },
 };
 </script>
 
 <style scoped>
-.vue-map-container::v-deep {
-  height: 360px;
+/deep/ .vue-map-container {
+  height: 20rem;
 }
 </style>
