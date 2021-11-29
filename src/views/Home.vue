@@ -176,7 +176,9 @@
               class="form-control"
               placeholder="20A"
               v-model="form.address.apartmentNumber"
-              :class="{ 'invalid-field': v$.form.address.apartmentNumber.$error }"
+              :class="{
+                'invalid-field': v$.form.address.apartmentNumber.$error,
+              }"
             />
           </div>
           <div v-if="v$.form.address.apartmentNumber.$error">
@@ -219,7 +221,9 @@
             :class="{ 'invalid-field': v$.form.address.state.$error }"
           >
             <option value="">Select state...</option>
-            <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
+            <option v-for="state in states" :key="state" :value="state">
+              {{ state }}
+            </option>
           </select>
           <div v-if="v$.form.address.state.$error">
             <p
@@ -288,7 +292,9 @@
               v-model="form.services"
               id="facebookService"
             />
-            <label class="form-check-label" for="facebookService">Facebook</label>
+            <label class="form-check-label" for="facebookService"
+              >Facebook</label
+            >
           </div>
           <div class="form-check">
             <input
@@ -308,7 +314,9 @@
               v-model="form.services"
               id="surfaceMailService"
             />
-            <label class="form-check-label" for="surfaceMailService">Surface mail</label>
+            <label class="form-check-label" for="surfaceMailService"
+              >Surface mail</label
+            >
           </div>
           <div class="form-check">
             <input
@@ -318,7 +326,9 @@
               v-model="form.services"
               id="personalVisitService"
             />
-            <label class="form-check-label" for="personalVisitService">Personal visit</label>
+            <label class="form-check-label" for="personalVisitService"
+              >Personal visit</label
+            >
           </div>
         </div>
 
@@ -333,7 +343,9 @@
               v-model="form.monthlyBudget"
               id="lessThan50"
             />
-            <label class="form-check-label" for="lessThan50">Less than $50</label>
+            <label class="form-check-label" for="lessThan50"
+              >Less than $50</label
+            >
           </div>
           <div class="form-check">
             <input
@@ -343,7 +355,9 @@
               v-model="form.monthlyBudget"
               id="between50And100"
             />
-            <label class="form-check-label" for="between50And100">Between $50 and $100</label>
+            <label class="form-check-label" for="between50And100"
+              >Between $50 and $100</label
+            >
           </div>
           <div class="form-check">
             <input
@@ -410,8 +424,14 @@
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div>
-        <p v-if="!form.captcha && v$.form.captcha.$dirty" class="invalid-message">
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"
+        ></div>
+        <p
+          v-if="!form.captcha && v$.form.captcha.$dirty"
+          class="invalid-message"
+        >
           CAPTCHA verification is required
         </p>
       </div>
@@ -420,7 +440,8 @@
       <div class="mb-5 text-center">
         <button
           class="w-50 btn btn-primary btn-lg fw-bold text-uppercase"
-          type="submit">
+          type="submit"
+        >
           Submit
         </button>
       </div>
@@ -444,8 +465,8 @@ import {
 } from "@vuelidate/validators";
 
 const validAlphaNumeric = (value) => {
-  return /^[a-zA-Z0-9 ]*$/.test(value)
-}
+  return /^[a-zA-Z0-9 ]*$/.test(value);
+};
 
 export default {
   name: "Home",
@@ -475,7 +496,58 @@ export default {
         captcha: "",
       },
       // References: https://usastatescode.com/state-array-json
-      states: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
+      states: [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming",
+      ],
     };
   },
   validations() {
@@ -505,63 +577,80 @@ export default {
         phone: {
           numeric,
           minLength: minLength(10),
-          maxLength: maxLength(10)
+          maxLength: maxLength(10),
         },
         address: {
           streetAddress: {
             required,
-            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+            validAlphaNumeric: helpers.withMessage(
+              "Value must be alpha-numeric",
+              validAlphaNumeric
+            ),
             maxLength: maxLength(40),
           },
           apartmentNumber: {
-            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+            validAlphaNumeric: helpers.withMessage(
+              "Value must be alpha-numeric",
+              validAlphaNumeric
+            ),
             maxLength: maxLength(40),
           },
           city: {
             required,
-            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+            validAlphaNumeric: helpers.withMessage(
+              "Value must be alpha-numeric",
+              validAlphaNumeric
+            ),
           },
           state: {
             required,
-            validAlphaNumeric: helpers.withMessage('Value must be alpha-numeric', validAlphaNumeric),
+            validAlphaNumeric: helpers.withMessage(
+              "Value must be alpha-numeric",
+              validAlphaNumeric
+            ),
           },
           zip: {
             required,
             numeric,
             maxLength: maxLength(5),
-            minLength: helpers.withMessage('Value must have 5 digits', minLength(5)),
+            minLength: helpers.withMessage(
+              "Value must have 5 digits",
+              minLength(5)
+            ),
           },
         },
         email: {
           required,
-          email
+          email,
         },
         terms: {
           required,
-          sameAs: helpers.withMessage('Please indicate that you have read and agreed to the Terms & Conditions', sameAs(true)),
+          sameAs: helpers.withMessage(
+            "Please indicate that you have read and agreed to the Terms & Conditions",
+            sameAs(true)
+          ),
         },
-        captcha: { required }
+        captcha: { required },
       },
     };
   },
   methods: {
     async onSubmit() {
-      let captcha = window.grecaptcha.getResponse()
+      let captcha = window.grecaptcha.getResponse();
       if (captcha) {
-        this.form.captcha = captcha
+        this.form.captcha = captcha;
       }
 
       await this.v$.$touch();
 
       if (!this.v$.$invalid) {
-        localStorage.setItem('form', JSON.stringify(this.form))
-        this.$router.push('result')
+        localStorage.setItem("form", JSON.stringify(this.form));
+        this.$router.push("result");
       } else {
-        return
+        return;
       }
     },
   },
-
 };
 </script>
 

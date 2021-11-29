@@ -15,7 +15,7 @@
       </div>
       <div class="mb-3">
         <div class="form-label mb-0">Your Height:</div>
-        <p><span>{{ this.form.height.feet }}' </span><span>{{ this.form.height.inches }}"</span></p>
+        <p>{{ getHeight }}</p>
       </div>
       <div>
         <div class="form-label mb-0">Phone Number:</div>
@@ -27,21 +27,28 @@
     <section class="mb-4 form-section">
       <h4 class="fw-bold text-uppercase">Address Information</h4>
       <p class="mb-0">{{ this.form.address.streetAddress }}</p>
-      <p class="mb-0" v-if="this.form.address.apartmentNumber">{{ this.form.address.apartmentNumber }}</p>
-      <p class="mb-0">{{ this.form.address.city }}, {{ this.form.address.state }} {{ this.form.address.zip }}</p>
+      <p class="mb-0" v-if="this.form.address.apartmentNumber">
+        {{ this.form.address.apartmentNumber }}
+      </p>
+      <p class="mb-0">
+        {{ this.form.address.city }}, {{ this.form.address.state }}
+        {{ this.form.address.zip }}
+      </p>
       <!-- Google Maps -->
-
+      <div id="map"></div>
     </section>
 
     <!-- Services Preferences -->
     <section class="mb-4 form-section">
       <h4 class="fw-bold text-uppercase">Services Preferences</h4>
-      <div class="form-label mb-0">All services you require: </div>
+      <div class="form-label mb-0">All services you require:</div>
       <ul v-if="getServices.length > 0">
-        <li v-for="service in getServices" :key="service.name">{{ service.value }}</li>
+        <li v-for="service in getServices" :key="service.name">
+          {{ service.value }}
+        </li>
       </ul>
       <p v-else>No services selected.</p>
-      <div class="form-label mb-0">Monthly Budget: </div>
+      <div class="form-label mb-0">Monthly Budget:</div>
       <p class="mb-0">{{ getBudget }}</p>
     </section>
 
@@ -83,88 +90,120 @@ export default {
       },
       preferredTitles: [
         {
-          name: 'none',
-          value: 'None'
+          name: "none",
+          value: "None",
         },
         {
-          name: 'student',
-          value: 'Student'
+          name: "student",
+          value: "Student",
         },
         {
-          name: 'professor',
-          value: 'Professor'
+          name: "professor",
+          value: "Professor",
         },
         {
-          name: 'staff',
-          value: 'Staff'
+          name: "staff",
+          value: "Staff",
         },
         {
-          name: 'retired',
-          value: 'Retired'
+          name: "retired",
+          value: "Retired",
         },
       ],
       services: [
         {
-          name: 'email',
-          value: 'Email'
+          name: "email",
+          value: "Email",
         },
         {
-          name: 'phone',
-          value: 'Phone'
+          name: "phone",
+          value: "Phone",
         },
         {
-          name: 'facebook',
-          value: 'Facebook'
+          name: "facebook",
+          value: "Facebook",
         },
         {
-          name: 'twitter',
-          value: 'Twitter'
+          name: "twitter",
+          value: "Twitter",
         },
         {
-          name: 'surface',
-          value: 'Surface mail'
+          name: "surface",
+          value: "Surface mail",
         },
         {
-          name: 'personal',
-          value: 'Personal visit'
+          name: "personal",
+          value: "Personal visit",
         },
       ],
       budgets: [
         {
-          name: 'lessThan50',
-          value: 'Less than $50'
+          name: "lessThan50",
+          value: "Less than $50",
         },
         {
-          name: 'between50And100',
-          value: 'Between $50 and $100'
+          name: "between50And100",
+          value: "Between $50 and $100",
         },
         {
-          name: 'above100',
-          value: 'Above $100'
+          name: "above100",
+          value: "Above $100",
         },
       ],
+      map: null,
+      mapCenter: {
+        lat: 0,
+        lng: 0,
+      },
     };
   },
   computed: {
     getPreferredTitle() {
-      return this.preferredTitles.find(title => title.name === this.form.preferredTitle)?.value
+      return this.preferredTitles.find(
+        (title) => title.name === this.form.preferredTitle
+      )?.value;
     },
     getServices() {
-      return this.services.filter(service => this.form.services.includes(service.name))
+      return this.services.filter((service) =>
+        this.form.services.includes(service.name)
+      );
     },
     getBudget() {
-      let budget = this.budgets.find(budget => budget.name === this.form.monthlyBudget)
-      return budget ? budget.value : 'No budget selected.'
+      let budget = this.budgets.find(
+        (budget) => budget.name === this.form.monthlyBudget
+      );
+      return budget ? budget.value : "No budget selected.";
     },
-},
-  mounted() {
-    this.form = JSON.parse(localStorage.getItem('form'))    
-    // TODO - call google maps to display address
+    getHeight() {
+      let { feet, inches } = this.form.height;
+      return feet > 0 || inches > 0
+        ? `${feet}' ${inches}''`
+        : "No height specified.";
+    },
+  },
+  async mounted() {
+    this.form = JSON.parse(localStorage.getItem("form"));
 
+    let { streetAddress, apartmentNumber, city, state, zip } =
+      this.form.address;
+
+    // call Geocode API to get latitude and longitude from address
+    let query = `${streetAddress},${apartmentNumber},${city},${state},${zip}`;
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=AIzaSyC4Dwl-tqT4jJ8F8FxIw0ALr9yxxoXI0MI`
+    );
+    const data = await response.json();
+    let { lat, lng } = data.results[0].geometry.location;
+    console.log(lat);
+    console.log(lng);
+
+    // call Google Maps API to get the map with marker
   },
 };
 </script>
 
 <style scoped>
-
+#map {
+  height: 100%;
+}
 </style>
