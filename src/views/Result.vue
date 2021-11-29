@@ -37,6 +37,7 @@
 
       <!-- Google Maps -->
       <GMapMap
+        v-if="mapCenter.lat && mapCenter.lng"
         :center="mapCenter"
         :zoom="14"
         map-type-id="roadmap"
@@ -162,8 +163,8 @@ export default {
         },
       ],
       mapCenter: {
-        lat: 0,
-        lng: 0,
+        lat: null,
+        lng: null,
       },
     };
   },
