@@ -8,5 +8,8 @@ import "./assets/global.css";
 // 1. Assign app to a variable
 let app = createApp(App)
 
-// 2. Use router and mount app
+// 2. Assign global variables
+app.config.globalProperties.window = window
+
+// 3. Use router and mount app
 app.use(router).mount('#app')
