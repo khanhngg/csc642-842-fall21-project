@@ -163,7 +163,6 @@ export default {
 },
   mounted() {
     this.form = JSON.parse(localStorage.getItem('form'))    
-    console.log(this.form)
     // TODO - call google maps to display address
 
   },
