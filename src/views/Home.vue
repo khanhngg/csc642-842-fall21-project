@@ -406,7 +406,7 @@
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" data-callback="onSubmitCaptcha"></div>
+        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" data-callback="form.captcha = arguments[0]"></div>
         <div v-if="v$.form.captcha.$error">
           <p
             :key="error.$uid"
