@@ -549,13 +549,16 @@ export default {
   },
   methods: {
     async onSubmit() {
-      await this.v$.$touch();
-
       let captcha = window.grecaptcha.getResponse()
       console.log('captcha response:')
       console.log(captcha)
-      
-      if (!this.v$.$invalid) {
+      if (captcha) {
+        this.form.captcha = captcha
+      }
+
+    await this.v$.$touch();
+
+    if (!this.v$.$invalid) {
         localStorage.setItem('form', JSON.stringify(this.form))
         this.$router.push('result')
       } else {
