@@ -406,13 +406,8 @@
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <!-- <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div> -->
-          <vue-recaptcha
-            theme="light"
-            size="normal"
-            :tabindex="0"
-            @verify="callbackVerify"
-          />
+        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" @click="handleCaptcha"></div>
+
       </div>
 
       <!-- Button -->
@@ -561,11 +556,12 @@ export default {
         return
       }
     },
+    callbackVerify(response) {
+      console.log('callbackverify...')
+      console.log(response)
+    },
   },
-  callbackVerify(response) {
-    console.log('callbackverify...')
-    console.log(response)
-  }
+
 };
 </script>
 
