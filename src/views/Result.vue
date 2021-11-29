@@ -3,7 +3,7 @@
     <h1 class="text-center mb-5">Results verification page Khanh Nguyen</h1>
 
     <!-- Personal Info -->
-    <section class="mb-5">
+    <section class="mb-4 form-section">
       <h4 class="fw-bold text-uppercase">Personal Information</h4>
       <div class="mb-3">
         <div class="form-label mb-0">Last name, First name:</div>
@@ -17,14 +17,14 @@
         <div class="form-label mb-0">Your Height:</div>
         <p><span>{{ this.form.height.feet }}' </span><span>{{ this.form.height.inches }}"</span></p>
       </div>
-      <div class="mb-3">
+      <div>
         <div class="form-label mb-0">Phone Number:</div>
-        <p>{{ this.form.phone }}</p>
+        <p class="mb-0">{{ this.form.phone }}</p>
       </div>
     </section>
 
     <!-- Address Info -->
-    <section class="mb-5">
+    <section class="mb-4 form-section">
       <h4 class="fw-bold text-uppercase">Address Information</h4>
       <p class="mb-0">{{ this.form.address.streetAddress }}</p>
       <p class="mb-0" v-if="this.form.address.apartmentNumber">{{ this.form.address.apartmentNumber }}</p>
@@ -34,7 +34,7 @@
     </section>
 
     <!-- Services Preferences -->
-    <section class="mb-5">
+    <section class="mb-4 form-section">
       <h4 class="fw-bold text-uppercase">Services Preferences</h4>
       <div class="form-label mb-0">All services you require: </div>
       <ul v-if="getServices.length > 0">
@@ -42,15 +42,19 @@
       </ul>
       <p v-else>No services selected.</p>
       <div class="form-label mb-0">Monthly Budget: </div>
-      <p>{{ getBudget }}</p>
+      <p class="mb-0">{{ getBudget }}</p>
     </section>
 
     <!-- Contact Info -->
-    <section class="mb-5">
+    <section class="mb-5 form-section">
       <h4 class="fw-bold text-uppercase">Contact Information</h4>
       <p class="form-label mb-0">Email Address:</p>
-      <p>{{ this.form.email }}</p>
+      <p class="mb-0">{{ this.form.email }}</p>
     </section>
+
+    <div class="mb-5 text-center">
+      <router-link class="w-50 btn btn-outline-primary btn-lg fw-bold mb-5" :to="{ name: 'Home' }">Start a new form</router-link>
+    </div>
   </div>
 </template>
 
