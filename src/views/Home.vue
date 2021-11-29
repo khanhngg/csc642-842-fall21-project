@@ -408,7 +408,7 @@
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
         <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div>
-        <div v-if="!form.captcha && v$.$dirty">
+        <div v-if="window.grecaptcha && !window.grecaptcha.getResponse()">
           <p class="mb-0 invalid-message">
             CAPTCHA verification is required
           </p>
