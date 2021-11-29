@@ -406,21 +406,17 @@
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" @click="handleCaptcha"></div>
-        <!-- <vue-recaptcha
-           theme="light"
-            size="normal"
-            :tabindex="0"
-            @verify="callbackVerify"
-        /> -->
+        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div>
+        <p v-if="!form.captcha && v$.form.captcha.$dirty">
+          CAPTCHA verification is required
+        </p>
       </div>
 
       <!-- Button -->
       <div class="mb-5 text-center">
         <button
           class="w-50 btn btn-primary btn-lg fw-bold text-uppercase"
-          type="submit"
-        >
+          type="submit">
           Submit
         </button>
       </div>
@@ -545,12 +541,10 @@ export default {
   },
   methods: {
     async onSubmit() {
-      // let captcha = window.grecaptcha.getResponse()
-      // console.log('captcha response:')
-      // console.log(captcha)
-      // if (captcha) {
-      //   this.form.captcha = captcha
-      // }
+      let captcha = window.grecaptcha.getResponse()
+      if (captcha) {
+        this.form.captcha = captcha
+      }
 
       await this.v$.$touch();
 
@@ -560,16 +554,6 @@ export default {
       } else {
         return
       }
-    },
-    handleCaptcha() {
-      console.log('captchat is clicked.....')
-      let test = window.grecaptcha.getResponse()
-      console.log(test)
-      
-    },
-    callbackVerify(response) {
-      console.log('callbackverify...')
-      console.log(response)
     },
   },
 
