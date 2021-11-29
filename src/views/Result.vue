@@ -34,8 +34,13 @@
         {{ this.form.address.city }}, {{ this.form.address.state }}
         {{ this.form.address.zip }}
       </p>
+
       <!-- Google Maps -->
-      <div id="map"></div>
+      <GMapMap
+        :center="mapCenter"
+        :zoom="15"
+        map-type-id="roadmap"
+      />
     </section>
 
     <!-- Services Preferences -->
@@ -196,14 +201,18 @@ export default {
     let { lat, lng } = data.results[0].geometry.location;
     console.log(lat);
     console.log(lng);
-
+    this.mapCenter = {
+      lat: lat,
+      lng: lng
+    }
+    // console.log(this.mapCenter)
     // call Google Maps API to get the map with marker
   },
 };
 </script>
 
 <style scoped>
-#map {
-  height: 100%;
+.vue-map-container::v-deep {
+  height: 360px;
 }
 </style>
