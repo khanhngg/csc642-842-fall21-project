@@ -5,7 +5,7 @@
       CSC 642 842 Fall 2021 Individual Assignment Khanh Nguyen
     </h6>
     <h1 class="text-center">Data Survey Form</h1>
-    <p class="form-text fst-italic mb-4">Required fields are marked with *</p>
+    <p class="form-text fw-bold fst-italic mb-4">Required fields are marked with *</p>
 
     <!-- Form -->
     <form class="g-3" @submit.prevent="onSubmit" novalidate>
