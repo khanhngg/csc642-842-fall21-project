@@ -51,10 +51,6 @@
       <p class="form-label mb-0">Email Address:</p>
       <p class="mb-0">{{ this.form.email }}</p>
     </section>
-
-    <div class="mb-5 text-center">
-      <router-link class="w-50 btn btn-outline-primary btn-lg fw-bold mb-5" :to="{ name: 'Home' }">Start a new form</router-link>
-    </div>
   </div>
 </template>
 
