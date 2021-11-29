@@ -439,7 +439,13 @@
       <!-- Button -->
       <div class="mb-5 text-center">
         <button
-          class="w-50 btn btn-primary btn-lg fw-bold text-uppercase"
+          class="d-none d-md-block w-50 btn btn-primary btn-lg fw-bold text-uppercase margin-auto"
+          type="submit"
+        >
+          Submit
+        </button>
+        <button
+          class="d-block d-md-none w-100 btn btn-primary btn-lg fw-bold text-uppercase"
           type="submit"
         >
           Submit
