@@ -404,10 +404,11 @@
       </div>
 
       <!-- Captcha -->
+      v dirty?: {{v$.$dirty}}
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
         <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div>
-        <div v-if="!form.captcha">
+        <div v-if="!form.captcha && v$.$dirty">
           <p class="mb-0 invalid-message">
             CAPTCHA verification is required
           </p>
@@ -539,15 +540,8 @@ export default {
           required,
           sameAs: helpers.withMessage('Please indicate that you have read and agreed to the Terms & Conditions', sameAs(true)),
         },
-        captcha: { required },
       },
     };
-  },
-  watch: {
-    'form.captcha': function(newValue, oldValue) {
-      console.log('in watcher captcha...')
-      console.log(newValue, oldValue)
-    }
   },
   methods: {
     async onSubmit() {
