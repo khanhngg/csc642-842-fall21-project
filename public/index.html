@@ -13,15 +13,6 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3" async defer></script>
-    <script type="text/javascript">
-      var ReCaptchaCallbackV3 = function() {
-          grecaptcha.ready(function() {
-              grecaptcha.execute("site_key").then(function(token) {
-                  console.log("v3 Token: " + token);
-              });
-          });
-      };
-  </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
 </html>

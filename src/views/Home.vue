@@ -407,13 +407,9 @@
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
         <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div>
-        <div v-if="v$.form.captcha.$error">
-          <p
-            :key="error.$uid"
-            v-for="error in v$.form.captcha.$errors"
-            class="mb-0 invalid-message"
-          >
-            {{ error.$message }}
+        <div v-if="!form.captcha">
+          <p class="mb-0 invalid-message">
+            CAPTCHA verification is required
           </p>
         </div>
       </div>
@@ -475,7 +471,7 @@ export default {
         monthlyBudget: "",
         email: "",
         terms: false,
-        captcha: this.GoogleReCaptcha ? this.GoogleReCaptcha.getResponse() : "",
+        captcha: "",
       },
       // References: https://usastatescode.com/state-array-json
       states: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
@@ -562,9 +558,9 @@ export default {
         this.form.captcha = captcha
       }
 
-    await this.v$.$touch();
+      await this.v$.$touch();
 
-    if (!this.v$.$invalid) {
+      if (!this.v$.$invalid) {
         localStorage.setItem('form', JSON.stringify(this.form))
         this.$router.push('result')
       } else {
