@@ -406,7 +406,7 @@
       <!-- Captcha -->
       <div class="mb-5">
         <label class="form-label">CAPTCHA *</label>
-        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l" data-callback="form.captcha = arguments[0]"></div>
+        <div class="g-recaptcha" data-sitekey="6LeqNGYdAAAAAI_amzuLJYS6-Eb9NdtNXdpibR6l"></div>
         <div v-if="v$.form.captcha.$error">
           <p
             :key="error.$uid"
@@ -475,7 +475,7 @@ export default {
         monthlyBudget: "",
         email: "",
         terms: false,
-        captcha: "",
+        captcha: this.window.grecaptcha ? this.window.grecaptcha.getResponse() : "",
       },
       // References: https://usastatescode.com/state-array-json
       states: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
@@ -547,6 +547,12 @@ export default {
       },
     };
   },
+  watch: {
+    'form.captcha': function(newValue, oldValue) {
+      console.log('in watcher captcha...')
+      console.log(newValue, oldValue)
+    }
+  },
   methods: {
     async onSubmit() {
       let captcha = window.grecaptcha.getResponse()
@@ -565,10 +571,6 @@ export default {
         return
       }
     },
-    onSubmitCaptcha(response) {
-      console.log('onsubmitcaptcha...')
-      console.log(response)
-    }
   },
 };
 </script>
