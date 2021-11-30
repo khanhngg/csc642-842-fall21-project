@@ -5,7 +5,9 @@
       CSC 642 842 Fall 2021 Individual Assignment Khanh Nguyen
     </h6>
     <h1 class="text-center">Data Survey Form</h1>
-    <p class="form-text fw-bold fst-italic mb-4">Required fields are marked with *</p>
+    <p class="form-text fw-bold fst-italic mb-4">
+      Required fields are marked with *
+    </p>
 
     <!-- Form -->
     <form class="g-3" @submit.prevent="onSubmit" novalidate>
@@ -40,7 +42,6 @@
             type="text"
             class="form-control"
             placeholder="Enter your first name"
-            maxlength="40"
             :class="{ 'invalid-field': v$.form.firstName.$error }"
             v-model="form.firstName"
           />
@@ -153,7 +154,6 @@
             type="text"
             class="form-control"
             placeholder="123 Main St"
-            maxlength="40"
             v-model="form.address.streetAddress"
             :class="{ 'invalid-field': v$.form.address.streetAddress.$error }"
           />
@@ -439,13 +439,26 @@
       <!-- Button -->
       <div class="mb-5 text-center">
         <button
-          class="d-none d-md-block w-50 btn btn-primary btn-lg fw-bold text-uppercase margin-auto"
+          class="
+            d-none d-md-block
+            w-50
+            btn btn-primary btn-lg
+            fw-bold
+            text-uppercase
+            margin-auto
+          "
           type="submit"
         >
           Submit
         </button>
         <button
-          class="d-block d-md-none w-100 btn btn-primary btn-lg fw-bold text-uppercase"
+          class="
+            d-block d-md-none
+            w-100
+            btn btn-primary btn-lg
+            fw-bold
+            text-uppercase
+          "
           type="submit"
         >
           Submit
@@ -464,11 +477,14 @@ import {
   maxLength,
   minValue,
   maxValue,
-  alpha,
   numeric,
   sameAs,
   helpers,
 } from "@vuelidate/validators";
+
+const validAlpha = (value) => {
+  return /^[a-zA-Z ]*$/.test(value);
+};
 
 const validAlphaNumeric = (value) => {
   return /^[a-zA-Z0-9 ]*$/.test(value);
@@ -561,12 +577,18 @@ export default {
       form: {
         lastName: {
           required,
-          alpha,
+          validAlpha: helpers.withMessage(
+            "Value must be alphabetical",
+            validAlpha
+          ),
           maxLength: maxLength(40),
         },
         firstName: {
           required,
-          alpha,
+          validAlpha: helpers.withMessage(
+            "Value must be alphabetical",
+            validAlpha
+          ),
           maxLength: maxLength(40),
         },
         preferredTitle: { required },
@@ -607,6 +629,7 @@ export default {
               "Value must be alpha-numeric",
               validAlphaNumeric
             ),
+            maxLength: maxLength(40),
           },
           state: {
             required,
@@ -614,6 +637,7 @@ export default {
               "Value must be alpha-numeric",
               validAlphaNumeric
             ),
+            maxLength: maxLength(40),
           },
           zip: {
             required,

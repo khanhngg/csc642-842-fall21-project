@@ -42,11 +42,7 @@
         :zoom="14"
         map-type-id="roadmap"
       >
-        <GMapMarker
-          :position="mapCenter"
-          :clickable="true"
-          :draggable="true"
-        />
+        <GMapMarker :position="mapCenter" :clickable="true" :draggable="true" />
       </GMapMap>
     </section>
 
@@ -197,7 +193,8 @@ export default {
     this.form = JSON.parse(localStorage.getItem("form"));
 
     // get address information from form
-    let { streetAddress, apartmentNumber, city, state, zip } = this.form.address;
+    let { streetAddress, apartmentNumber, city, state, zip } =
+      this.form.address;
 
     // call Geocode API to get latitude and longitude from address information
     let query = `${streetAddress},${apartmentNumber},${city},${state},${zip}`;
@@ -206,12 +203,12 @@ export default {
     );
     const data = await response.json();
 
-    // set latitude and longitude for map center and marker 
+    // set latitude and longitude for map center and marker
     let { lat, lng } = data.results[0].geometry.location;
     this.mapCenter = {
       lat: lat,
-      lng: lng
-    }
+      lng: lng,
+    };
   },
 };
 </script>
