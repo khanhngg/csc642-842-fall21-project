@@ -243,7 +243,6 @@
             class="form-control"
             id="zip"
             placeholder="12345"
-            maxlength="5"
             v-model="form.address.zip"
             :class="{ 'invalid-field': v$.form.address.zip.$error }"
           />
